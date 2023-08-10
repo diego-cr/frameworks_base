@@ -13,32 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.android.internal.util.aicp;
-
 import android.content.res.Resources;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Log;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import com.android.internal.util.ArrayUtils;
-
 /**
  * @hide
  */
 public final class DeviceConfigUtils {
-
     private static final String TAG = DeviceConfigUtils.class.getSimpleName();
     private static final boolean DEBUG = false;
-
     private static Boolean sEnableDeviceConfigUtils =
             SystemProperties.getBoolean("persist.sys.dchooks.enable", true);
-/*
     private static String[] getDeviceConfigsOverride() {
         String[] globalDeviceConfigs =
             Resources.getSystem().getStringArray(com.android.internal.R.array.global_device_configs_override);
@@ -48,10 +40,8 @@ public final class DeviceConfigUtils {
         System.arraycopy(deviceConfigs, 0, allDeviceConfigs, globalDeviceConfigs.length, deviceConfigs.length);
         return allDeviceConfigs;
     }
-
     public static boolean shouldDenyDeviceConfigControl(String namespace, String property) {
         if (!sEnableDeviceConfigUtils) return false;
-
         if (DEBUG) Log.d(TAG, "shouldAllowDeviceConfigControl, namespace=" + namespace + ", property=" + property);
         for (String p : getDeviceConfigsOverride()) {
             String[] kv = p.split("=");
@@ -65,27 +55,21 @@ public final class DeviceConfigUtils {
         logd("shouldAllowDeviceConfigControl, allow, namespace=" + namespace + ", property=" + property);
         return false;
     }
-
     public static void setDefaultProperties(String filterNamespace, String filterProperty) {
         if (!sEnableDeviceConfigUtils) return;
-
         logd("setDefaultProperties");
         for (String p : getDeviceConfigsOverride()) {
             String[] kv = p.split("=");
             String fullKey = kv[0];
             String[] nsKey = fullKey.split("/");
-
             String namespace = nsKey[0];
             String key = nsKey[1];
-
             if (filterNamespace != null && filterNamespace == namespace){
                 continue;
             }
-
             if (filterProperty != null && filterProperty == key){
                 continue;
             }
-
             String value = "";
             if (kv.length > 1) {
                 value = kv[1];
@@ -93,7 +77,6 @@ public final class DeviceConfigUtils {
             Settings.Config.putString(namespace, key, value, false);
         }
     }
-*/
     private static void logd(String msg) {
         if (DEBUG) Log.d(TAG, msg);
     }
